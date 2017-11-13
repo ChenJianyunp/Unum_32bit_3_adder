@@ -1,0 +1,173 @@
+module unum_adder(
+	input clk,
+	input[31:0] unum1,
+	input[31:0] unum2,
+	
+	output[31:0] unum_o
+);
+
+
+reg[1:0] isZero_1;   //isZero[1]: unum1   [0]: unum2    =0 if value is zero
+reg[1:0] isInf_1;	 //isInf[1]: unum1    [0]: unum2    =1 if value is Inf
+reg[31:0] temp1,temp2;
+always@(posedge clk)begin
+	if(unum1[30:0]==31'b0)begin isZero_1[1]<=unum1[31]; isInf_1[1]<=~unum1[31]; end
+	else begin isZero_1[1]<=1'b1; isInf_1[1]<=1'b0;end 
+	
+	if(unum2[30:0]==31'b0)begin isZero_1[0]<=unum2[31]; isInf_1[0]<=~unum2[31]; end
+	else begin isZero_1[0]<=1'b1; isInf_1[0]<=1'b0; end
+	
+	if(unum1[31])begin temp1<=32'h8000_0000-unum1[31:0]; end  /// change unum from 2nd complement to original
+	else begin temp1<=unum1[31:0]; end
+	if(unum2[31])begin temp2<=32'h8000_0000-unum2[31:0]; end
+	else begin temp2<=unum2[31:0]; end
+	temp1[31]<=unum1[31];
+	temp2[31]<=unum2[31];
+end
+
+
+
+reg[1:0] isInf_2;
+reg[55:27] frac_num1,frac_num2;
+reg[8:0] expo_num1, expo_num2;
+always@(posedge clk)begin
+	casex(temp1[30:0])//synthesis parallel_case
+		31'b10xx_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx:	begin expo_num1[8:3]<=6'd0;  expo_num1[2:0]<=temp1[28:26]; 		frac_num1[52:27]<=temp1[25:0]; end
+		31'b110x_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'd1;  expo_num1[2:0]<=temp1[27:25]; 		frac_num1[52:28]<=temp1[24:0]; end
+		31'b1110_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'd2;  expo_num1[2:0]<=temp1[26:24]; 		frac_num1[52:29]<=temp1[23:0]; end
+		31'b1111_0xxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'd3;  expo_num1[2:0]<=temp1[25:23]; 		frac_num1[52:30]<=temp1[22:0]; end
+		31'b1111_10xx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'd4;  expo_num1[2:0]<=temp1[24:22]; 		frac_num1[52:31]<=temp1[21:0]; end
+		31'b1111_110x_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'd5;  expo_num1[2:0]<=temp1[23:21]; 		frac_num1[52:32]<=temp1[20:0]; end
+		31'b1111_1110_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'd6;  expo_num1[2:0]<=temp1[22:20]; 		frac_num1[52:33]<=temp1[19:0]; end
+		31'b1111_1111_0xxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'd7;  expo_num1[2:0]<=temp1[21:19]; 		frac_num1[52:34]<=temp1[18:0]; end
+		31'b1111_1111_10xx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'd8;  expo_num1[2:0]<=temp1[20:18]; 		frac_num1[52:35]<=temp1[17:0]; end
+		31'b1111_1111_110x_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'd9;  expo_num1[2:0]<=temp1[19:17]; 		frac_num1[52:36]<=temp1[16:0]; end
+		31'b1111_1111_1110_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'd10; expo_num1[2:0]<=temp1[18:16]; 		frac_num1[52:37]<=temp1[15:0]; end
+		31'b1111_1111_1111_0xxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'd11; expo_num1[2:0]<=temp1[17:15]; 		frac_num1[52:38]<=temp1[14:0]; end
+		31'b1111_1111_1111_10xx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'd12; expo_num1[2:0]<=temp1[16:14]; 		frac_num1[52:39]<=temp1[13:0]; end
+		31'b1111_1111_1111_110x_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'd13; expo_num1[2:0]<=temp1[15:13]; 		frac_num1[52:40]<=temp1[12:0]; end
+		31'b1111_1111_1111_1110_xxxx_xxxx_xxxx_xxx:	begin expo_num1[8:3]<=6'd14; expo_num1[2:0]<=temp1[14:12]; 		frac_num1[52:41]<=temp1[11:0]; end
+		31'b1111_1111_1111_1111_0xxx_xxxx_xxxx_xxx:	begin expo_num1[8:3]<=6'd15; expo_num1[2:0]<=temp1[13:11]; 		frac_num1[52:42]<=temp1[10:0]; end
+		31'b1111_1111_1111_1111_10xx_xxxx_xxxx_xxx:	begin expo_num1[8:3]<=6'd16; expo_num1[2:0]<=temp1[12:10]; 		frac_num1[52:43]<=temp1[9:0]; end
+		31'b1111_1111_1111_1111_110x_xxxx_xxxx_xxx:	begin expo_num1[8:3]<=6'd17; expo_num1[2:0]<=temp1[11:9]; 		frac_num1[52:44]<=temp1[8:0]; end
+		31'b1111_1111_1111_1111_1110_xxxx_xxxx_xxx:	begin expo_num1[8:3]<=6'd18; expo_num1[2:0]<=temp1[10:8]; 		frac_num1[52:45]<=temp1[7:0]; end
+		31'b1111_1111_1111_1111_1111_0xxx_xxxx_xxx:	begin expo_num1[8:3]<=6'd19; expo_num1[2:0]<=temp1[9:7]; 		frac_num1[52:46]<=temp1[6:0]; end
+		31'b1111_1111_1111_1111_1111_10xx_xxxx_xxx:	begin expo_num1[8:3]<=6'd20; expo_num1[2:0]<=temp1[8:6]; 		frac_num1[52:47]<=temp1[5:0]; end
+		31'b1111_1111_1111_1111_1111_110x_xxxx_xxx:	begin expo_num1[8:3]<=6'd21; expo_num1[2:0]<=temp1[7:5]; 		frac_num1[52:48]<=temp1[4:0]; end
+		31'b1111_1111_1111_1111_1111_1110_xxxx_xxx:	begin expo_num1[8:3]<=6'd22; expo_num1[2:0]<=temp1[6:4]; 		frac_num1[52:49]<=temp1[3:0]; end
+		31'b1111_1111_1111_1111_1111_1111_0xxx_xxx:	begin expo_num1[8:3]<=6'd23; expo_num1[2:0]<=temp1[5:3]; 		frac_num1[52:50]<=temp1[2:0]; end
+		31'b1111_1111_1111_1111_1111_1111_10xx_xxx:	begin expo_num1[8:3]<=6'd24; expo_num1[2:0]<=temp1[4:2]; 		frac_num1[52:51]<=temp1[1:0]; end
+		31'b1111_1111_1111_1111_1111_1111_110x_xxx:	begin expo_num1[8:3]<=6'd25; expo_num1[2:0]<=temp1[3:1]; 		frac_num1[52]<=temp1[0]; end
+		31'b1111_1111_1111_1111_1111_1111_1110_xxx:	begin expo_num1[8:3]<=6'd26; expo_num1[2:0]<=temp1[2:0];	end
+		31'b1111_1111_1111_1111_1111_1111_1111_0xx:	begin expo_num1[8:3]<=6'd27; expo_num1[2:0]<={temp1[1:0],1'b0};	end
+		31'b1111_1111_1111_1111_1111_1111_1111_10x:	begin expo_num1[8:3]<=6'd28; expo_num1[2:0]<={temp1[0],2'b0};end
+		31'b1111_1111_1111_1111_1111_1111_1111_110:	begin expo_num1[8:3]<=6'd29; end
+		31'b1111_1111_1111_1111_1111_1111_1111_111:	begin expo_num1[8:3]<=6'd30; end
+				
+		31'b01xx_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx:	begin expo_num1[8:3]<=6'b111111;  expo_num1[2:0]<=temp1[28:26]; 		frac_num1[52:27]<=temp1[25:0]; end
+		31'b001x_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'b111110;  expo_num1[2:0]<=temp1[27:25]; 		frac_num1[52:28]<=temp1[24:0]; end
+		31'b0001_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'b111101;  expo_num1[2:0]<=temp1[26:24]; 		frac_num1[52:29]<=temp1[23:0]; end
+		31'b0000_1xxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'b111100;  expo_num1[2:0]<=temp1[25:23]; 		frac_num1[52:30]<=temp1[22:0]; end
+		31'b0000_01xx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'b111011;  expo_num1[2:0]<=temp1[24:22]; 		frac_num1[52:31]<=temp1[21:0]; end
+		31'b0000_001x_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'b111010;  expo_num1[2:0]<=temp1[23:21]; 		frac_num1[52:32]<=temp1[20:0]; end
+		31'b0000_0001_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'b111001;  expo_num1[2:0]<=temp1[22:20]; 		frac_num1[52:33]<=temp1[19:0]; end
+		31'b0000_0000_1xxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'b111000;  expo_num1[2:0]<=temp1[21:19]; 		frac_num1[52:34]<=temp1[18:0]; end
+		31'b0000_0000_01xx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'b110111;  expo_num1[2:0]<=temp1[20:18]; 		frac_num1[52:35]<=temp1[17:0]; end
+		31'b0000_0000_001x_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'b110110;  expo_num1[2:0]<=temp1[19:17]; 		frac_num1[52:36]<=temp1[16:0]; end
+		31'b0000_0000_0001_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'b110101; expo_num1[2:0]<=temp1[18:16]; 		frac_num1[52:37]<=temp1[15:0]; end
+		31'b0000_0000_0000_1xxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'b110100; expo_num1[2:0]<=temp1[17:15]; 		frac_num1[52:38]<=temp1[14:0]; end
+		31'b0000_0000_0000_01xx_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'b110011; expo_num1[2:0]<=temp1[16:14]; 		frac_num1[52:39]<=temp1[13:0]; end
+		31'b0000_0000_0000_001x_xxxx_xxxx_xxxx_xxx: 	begin expo_num1[8:3]<=6'b110010; expo_num1[2:0]<=temp1[15:13]; 		frac_num1[52:40]<=temp1[12:0]; end
+		31'b0000_0000_0000_0001_xxxx_xxxx_xxxx_xxx:	begin expo_num1[8:3]<=6'b110001; expo_num1[2:0]<=temp1[14:12]; 		frac_num1[52:41]<=temp1[11:0]; end
+		31'b0000_0000_0000_0000_1xxx_xxxx_xxxx_xxx:	begin expo_num1[8:3]<=6'b110000; expo_num1[2:0]<=temp1[13:11]; 		frac_num1[52:42]<=temp1[10:0]; end
+		31'b0000_0000_0000_0000_01xx_xxxx_xxxx_xxx:	begin expo_num1[8:3]<=6'b101111; expo_num1[2:0]<=temp1[12:10]; 		frac_num1[52:43]<=temp1[9:0]; end
+		31'b0000_0000_0000_0000_001x_xxxx_xxxx_xxx:	begin expo_num1[8:3]<=6'b101110; expo_num1[2:0]<=temp1[11:9]; 			frac_num1[52:44]<=temp1[8:0]; end
+		31'b0000_0000_0000_0000_0001_xxxx_xxxx_xxx:	begin expo_num1[8:3]<=6'b101101; expo_num1[2:0]<=temp1[10:8]; 			frac_num1[52:45]<=temp1[7:0]; end
+		31'b0000_0000_0000_0000_0000_1xxx_xxxx_xxx:	begin expo_num1[8:3]<=6'b101100; expo_num1[2:0]<=temp1[9:7]; 			frac_num1[52:46]<=temp1[6:0]; end
+		31'b0000_0000_0000_0000_0000_01xx_xxxx_xxx:	begin expo_num1[8:3]<=6'b101011; expo_num1[2:0]<=temp1[8:6]; 			frac_num1[52:47]<=temp1[5:0]; end
+		31'b0000_0000_0000_0000_0000_001x_xxxx_xxx:	begin expo_num1[8:3]<=6'b101010; expo_num1[2:0]<=temp1[7:5]; 			frac_num1[52:48]<=temp1[4:0]; end
+		31'b0000_0000_0000_0000_0000_0001_xxxx_xxx:	begin expo_num1[8:3]<=6'b101001; expo_num1[2:0]<=temp1[6:4]; 			frac_num1[52:49]<=temp1[3:0]; end
+		31'b0000_0000_0000_0000_0000_0000_1xxx_xxx:	begin expo_num1[8:3]<=6'b101000; expo_num1[2:0]<=temp1[5:3]; 			frac_num1[52:50]<=temp1[2:0]; end
+		31'b0000_0000_0000_0000_0000_0000_01xx_xxx:	begin expo_num1[8:3]<=6'b100111; expo_num1[2:0]<=temp1[4:2]; 			frac_num1[52:51]<=temp1[1:0]; end
+		31'b0000_0000_0000_0000_0000_0000_001x_xxx:	begin expo_num1[8:3]<=6'b100110; expo_num1[2:0]<=temp1[3:1]; 			frac_num1[52]<=temp1[0]; end
+		31'b0000_0000_0000_0000_0000_0000_0001_xxx:	begin expo_num1[8:3]<=6'b100101; expo_num1[2:0]<=temp1[2:0];			end
+		31'b0000_0000_0000_0000_0000_0000_0000_1xx:	begin expo_num1[8:3]<=6'b100100; expo_num1[2:0]<={temp1[1:0],1'b0};	end
+		31'b0000_0000_0000_0000_0000_0000_0000_01x:	begin expo_num1[8:3]<=6'b100011; expo_num1[2:0]<={temp1[0],2'b0};		end
+		31'b0000_0000_0000_0000_0000_0000_0000_001:	begin expo_num1[8:3]<=6'b100010; end
+		default:;
+	endcase
+				//for num2
+	casex(temp2[30:0])
+		31'b10xx_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx:	begin expo_num2[8:3]<=6'd0;  expo_num2[2:0]<=temp2[28:26]; 		frac_num2[52:27]<=temp2[25:0]; end
+		31'b110x_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'd1;  expo_num2[2:0]<=temp2[27:25]; 		frac_num2[52:28]<=temp2[24:0]; end
+		31'b1110_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'd2;  expo_num2[2:0]<=temp2[26:24]; 		frac_num2[52:29]<=temp2[23:0]; end
+		31'b1111_0xxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'd3;  expo_num2[2:0]<=temp2[25:23]; 		frac_num2[52:30]<=temp2[22:0]; end
+		31'b1111_10xx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'd4;  expo_num2[2:0]<=temp2[24:22]; 		frac_num2[52:31]<=temp2[21:0]; end
+		31'b1111_110x_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'd5;  expo_num2[2:0]<=temp2[23:21]; 		frac_num2[52:32]<=temp2[20:0]; end
+		31'b1111_1110_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'd6;  expo_num2[2:0]<=temp2[22:20]; 		frac_num2[52:33]<=temp2[19:0]; end
+		31'b1111_1111_0xxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'd7;  expo_num2[2:0]<=temp2[21:19]; 		frac_num2[52:34]<=temp2[18:0]; end
+		31'b1111_1111_10xx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'd8;  expo_num2[2:0]<=temp2[20:18]; 		frac_num2[52:35]<=temp2[17:0]; end
+		31'b1111_1111_110x_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'd9;  expo_num2[2:0]<=temp2[19:17]; 		frac_num2[52:36]<=temp2[16:0]; end
+		31'b1111_1111_1110_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'd10; expo_num2[2:0]<=temp2[18:16]; 		frac_num2[52:37]<=temp2[15:0]; end
+		31'b1111_1111_1111_0xxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'd11; expo_num2[2:0]<=temp2[17:15]; 		frac_num2[52:38]<=temp2[14:0]; end
+		31'b1111_1111_1111_10xx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'd12; expo_num2[2:0]<=temp2[16:14]; 		frac_num2[52:39]<=temp2[13:0]; end
+		31'b1111_1111_1111_110x_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'd13; expo_num2[2:0]<=temp2[15:13]; 		frac_num2[52:40]<=temp2[12:0]; end
+		31'b1111_1111_1111_1110_xxxx_xxxx_xxxx_xxx:	begin expo_num2[8:3]<=6'd14; expo_num2[2:0]<=temp2[14:12]; 		frac_num2[52:41]<=temp2[11:0]; end
+		31'b1111_1111_1111_1111_0xxx_xxxx_xxxx_xxx:	begin expo_num2[8:3]<=6'd15; expo_num2[2:0]<=temp2[13:11]; 		frac_num2[52:42]<=temp2[10:0]; end
+		31'b1111_1111_1111_1111_10xx_xxxx_xxxx_xxx:	begin expo_num2[8:3]<=6'd16; expo_num2[2:0]<=temp2[12:10]; 		frac_num2[52:43]<=temp2[9:0]; end
+		31'b1111_1111_1111_1111_110x_xxxx_xxxx_xxx:	begin expo_num2[8:3]<=6'd17; expo_num2[2:0]<=temp2[11:9]; 		frac_num2[52:44]<=temp2[8:0]; end
+		31'b1111_1111_1111_1111_1110_xxxx_xxxx_xxx:	begin expo_num2[8:3]<=6'd18; expo_num2[2:0]<=temp2[10:8]; 		frac_num2[52:45]<=temp2[7:0]; end
+		31'b1111_1111_1111_1111_1111_0xxx_xxxx_xxx:	begin expo_num2[8:3]<=6'd19; expo_num2[2:0]<=temp2[9:7]; 		frac_num2[52:46]<=temp2[6:0]; end
+		31'b1111_1111_1111_1111_1111_10xx_xxxx_xxx:	begin expo_num2[8:3]<=6'd20; expo_num2[2:0]<=temp2[8:6]; 		frac_num2[52:47]<=temp2[5:0]; end
+		31'b1111_1111_1111_1111_1111_110x_xxxx_xxx:	begin expo_num2[8:3]<=6'd21; expo_num2[2:0]<=temp2[7:5]; 		frac_num2[52:48]<=temp2[4:0]; end
+		31'b1111_1111_1111_1111_1111_1110_xxxx_xxx:	begin expo_num2[8:3]<=6'd22; expo_num2[2:0]<=temp2[6:4]; 		frac_num2[52:49]<=temp2[3:0]; end
+		31'b1111_1111_1111_1111_1111_1111_0xxx_xxx:	begin expo_num2[8:3]<=6'd23; expo_num2[2:0]<=temp2[5:3]; 		frac_num2[52:50]<=temp2[2:0]; end
+		31'b1111_1111_1111_1111_1111_1111_10xx_xxx:	begin expo_num2[8:3]<=6'd24; expo_num2[2:0]<=temp2[4:2]; 		frac_num2[52:51]<=temp2[1:0]; end
+		31'b1111_1111_1111_1111_1111_1111_110x_xxx:	begin expo_num2[8:3]<=6'd25; expo_num2[2:0]<=temp2[3:1]; 		frac_num2[52]<=temp2[0]; end
+		31'b1111_1111_1111_1111_1111_1111_1110_xxx:	begin expo_num2[8:3]<=6'd26; expo_num2[2:0]<=temp2[2:0];	end
+		31'b1111_1111_1111_1111_1111_1111_1111_0xx:	begin expo_num2[8:3]<=6'd27; expo_num2[2:0]<={temp2[1:0],1'b0};	end
+		31'b1111_1111_1111_1111_1111_1111_1111_10x:	begin expo_num2[8:3]<=6'd28; expo_num2[2:0]<={temp2[0],2'b0};end
+		31'b1111_1111_1111_1111_1111_1111_1111_110:	begin expo_num2[8:3]<=6'd29; end
+		31'b1111_1111_1111_1111_1111_1111_1111_111:	begin expo_num2[8:3]<=6'd30; end
+				
+		31'b01xx_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx:	begin expo_num2[8:3]<=6'b111111;  expo_num2[2:0]<=temp2[28:26]; 		frac_num2[52:27]<=temp2[25:0]; end
+		31'b001x_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'b111110;  expo_num2[2:0]<=temp2[27:25]; 		frac_num2[52:28]<=temp2[24:0]; end
+		31'b0001_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'b111101;  expo_num2[2:0]<=temp2[26:24]; 		frac_num2[52:29]<=temp2[23:0]; end
+		31'b0000_1xxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'b111100;  expo_num2[2:0]<=temp2[25:23]; 		frac_num2[52:30]<=temp2[22:0]; end
+		31'b0000_01xx_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'b111011;  expo_num2[2:0]<=temp2[24:22]; 		frac_num2[52:31]<=temp2[21:0]; end
+		31'b0000_001x_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'b111010;  expo_num2[2:0]<=temp2[23:21]; 		frac_num2[52:32]<=temp2[20:0]; end
+		31'b0000_0001_xxxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'b111001;  expo_num2[2:0]<=temp2[22:20]; 		frac_num2[52:33]<=temp2[19:0]; end
+		31'b0000_0000_1xxx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'b111000;  expo_num2[2:0]<=temp2[21:19]; 		frac_num2[52:34]<=temp2[18:0]; end
+		31'b0000_0000_01xx_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'b110111;  expo_num2[2:0]<=temp2[20:18]; 		frac_num2[52:35]<=temp2[17:0]; end
+		31'b0000_0000_001x_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'b110110;  expo_num2[2:0]<=temp2[19:17]; 		frac_num2[52:36]<=temp2[16:0]; end
+		31'b0000_0000_0001_xxxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'b110101; expo_num2[2:0]<=temp2[18:16]; 		frac_num2[52:37]<=temp2[15:0]; end
+		31'b0000_0000_0000_1xxx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'b110100; expo_num2[2:0]<=temp2[17:15]; 		frac_num2[52:38]<=temp2[14:0]; end
+		31'b0000_0000_0000_01xx_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'b110011; expo_num2[2:0]<=temp2[16:14]; 		frac_num2[52:39]<=temp2[13:0]; end
+		31'b0000_0000_0000_001x_xxxx_xxxx_xxxx_xxx: 	begin expo_num2[8:3]<=6'b110010; expo_num2[2:0]<=temp2[15:13]; 		frac_num2[52:40]<=temp2[12:0]; end
+		31'b0000_0000_0000_0001_xxxx_xxxx_xxxx_xxx:	begin expo_num2[8:3]<=6'b110001; expo_num2[2:0]<=temp2[14:12]; 		frac_num2[52:41]<=temp2[11:0]; end
+		31'b0000_0000_0000_0000_1xxx_xxxx_xxxx_xxx:	begin expo_num2[8:3]<=6'b110000; expo_num2[2:0]<=temp2[13:11]; 		frac_num2[52:42]<=temp2[10:0]; end
+		31'b0000_0000_0000_0000_01xx_xxxx_xxxx_xxx:	begin expo_num2[8:3]<=6'b101111; expo_num2[2:0]<=temp2[12:10]; 		frac_num2[52:43]<=temp2[9:0]; end
+		31'b0000_0000_0000_0000_001x_xxxx_xxxx_xxx:	begin expo_num2[8:3]<=6'b101110; expo_num2[2:0]<=temp2[11:9]; 			frac_num2[52:44]<=temp2[8:0]; end
+		31'b0000_0000_0000_0000_0001_xxxx_xxxx_xxx:	begin expo_num2[8:3]<=6'b101101; expo_num2[2:0]<=temp2[10:8]; 			frac_num2[52:45]<=temp2[7:0]; end
+		31'b0000_0000_0000_0000_0000_1xxx_xxxx_xxx:	begin expo_num2[8:3]<=6'b101100; expo_num2[2:0]<=temp2[9:7]; 			frac_num2[52:46]<=temp2[6:0]; end
+		31'b0000_0000_0000_0000_0000_01xx_xxxx_xxx:	begin expo_num2[8:3]<=6'b101011; expo_num2[2:0]<=temp2[8:6]; 			frac_num2[52:47]<=temp2[5:0]; end
+		31'b0000_0000_0000_0000_0000_001x_xxxx_xxx:	begin expo_num2[8:3]<=6'b101010; expo_num2[2:0]<=temp2[7:5]; 			frac_num2[52:48]<=temp2[4:0]; end
+		31'b0000_0000_0000_0000_0000_0001_xxxx_xxx:	begin expo_num2[8:3]<=6'b101001; expo_num2[2:0]<=temp2[6:4]; 			frac_num2[52:49]<=temp2[3:0]; end
+		31'b0000_0000_0000_0000_0000_0000_1xxx_xxx:	begin expo_num2[8:3]<=6'b101000; expo_num2[2:0]<=temp2[5:3]; 			frac_num2[52:50]<=temp2[2:0]; end
+		31'b0000_0000_0000_0000_0000_0000_01xx_xxx:	begin expo_num2[8:3]<=6'b100111; expo_num2[2:0]<=temp2[4:2]; 			frac_num2[52:51]<=temp2[1:0]; end
+		31'b0000_0000_0000_0000_0000_0000_001x_xxx:	begin expo_num2[8:3]<=6'b100110; expo_num2[2:0]<=temp2[3:1]; 			frac_num2[52]<=temp2[0]; end
+		31'b0000_0000_0000_0000_0000_0000_0001_xxx:	begin expo_num2[8:3]<=6'b100101; expo_num2[2:0]<=temp2[2:0];			end
+		31'b0000_0000_0000_0000_0000_0000_0000_1xx:	begin expo_num2[8:3]<=6'b100100; expo_num2[2:0]<={temp2[1:0],1'b0};	end
+		31'b0000_0000_0000_0000_0000_0000_0000_01x:	begin expo_num2[8:3]<=6'b100011; expo_num2[2:0]<={temp2[0],2'b0};		end
+		31'b0000_0000_0000_0000_0000_0000_0000_001:	begin expo_num2[8:3]<=6'b100010; end
+		default:;
+	endcase	
+	
+	isInf_2<=isInf_1;
+
+end
+
+
+
+
+endmodule

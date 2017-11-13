@@ -1,0 +1,61 @@
+# Reading D:/quartus/modelsim_ase/tcl/vsim/pref.tcl
+# do unum_adder_run_msim_rtl_verilog.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 10.5b Lib Mapping Utility 2016.10 Oct  5 2016
+# vmap work rtl_work 
+# Copying D:/quartus/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vlog -vlog01compat -work work +incdir+F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder {F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 23:33:37 on Nov 12,2017
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder" F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v 
+# -- Compiling module unum_adder
+# -- Compiling module LZC
+# -- Compiling module LZA_fraction
+# -- Compiling module BNE
+# -- Compiling module NLC
+# 
+# Top level modules:
+# 	unum_adder
+# End time: 23:33:37 on Nov 12,2017, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vlog -vlog01compat -work work +incdir+F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim {F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 23:33:37 on Nov 12,2017
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim" F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt 
+# -- Compiling module unum_adder_vlg_tst
+# 
+# Top level modules:
+# 	unum_adder_vlg_tst
+# End time: 23:33:37 on Nov 12,2017, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs="+acc"  unum_adder_vlg_tst
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs=""+acc"" unum_adder_vlg_tst 
+# Start time: 23:33:37 on Nov 12,2017
+# Loading work.unum_adder_vlg_tst
+# Loading work.unum_adder
+# Loading work.LZC
+# Loading work.BNE
+# Loading work.NLC
+# Loading work.LZA_fraction
+# 
+# add wave *
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: 7566-1745B  Hostname: DESKTOP-O4KCONL  ProcessID: 11580
+#           Attempting to use alternate WLF file "./wlftb2dsxe".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftb2dsxe
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run 10 ps
+# End time: 23:41:05 on Nov 12,2017, Elapsed time: 0:07:28
+# Errors: 0, Warnings: 2
