@@ -46,8 +46,8 @@ always@(posedge clk)begin  ////////1st
 	temp1[31]<=unum1[31];
 	temp2[31]<=unum2[31];
 end
-LZC lzc1(.x1(unum1_2s),.n(n1));
-LZC lzc2(.x1(unum2_2s),.n(n2));
+LZC lzc1(.x1(unum1[31]?unum1_2s:unum1[31:0]),.n(n1));
+LZC lzc2(.x1(unum2[31]?unum2_2s:unum2[31:0]),.n(n2));
 ///2nd: seperate regime bits, exponent bits, sign bit and fraction bits
 //change regime bits and exponent bits into exponent value in 2's complement format
 //compare the absolut value of input numbers
@@ -97,6 +97,7 @@ always@(posedge clk)begin         //3rd
 	if(compare_abs_2)begin expo_numo_3<={expo_num1[8:3],temp1_2[28:26]}; diff_expo<={expo_num1[8:3],temp1_2[28:26]}-{expo_num2[8:3],temp2_2[28:26]}; end
 	else begin expo_numo_3<={expo_num2[8:3],temp2_2[28:26]};	diff_expo<={expo_num2[8:3],temp2_2[28:26]}-{expo_num1[8:3],temp1_2[28:26]};end
 	
+	compare_abs_3<=compare_abs_2;
 	isInf_3<=isInf_2;
 end
 
@@ -105,6 +106,7 @@ end
 reg[55:0] frac_num1_4,frac_num2_4;
 reg[8:0] expo_numo_4;
 reg isInf_4;
+reg compare_abs_4;
 always@(posedge clk)begin			///4th
 	if(compare_abs_3)begin
 		frac_num2_4[53:0]<={frac_num2_3[53:27],27'b0}>>diff_expo[7:0];
@@ -119,42 +121,40 @@ always@(posedge clk)begin			///4th
 	isInf_4<=isInf_3;
 	frac_num2_4[55:54]<={frac_num2_3[55],1'b0};
 	frac_num1_4[55:54]<={frac_num1_3[55],1'b0};
+	compare_abs_4<=compare_abs_3;
 end
 
 
 //5th: add fraction(in signed magnitude format) of unum1 and unum2 
-reg[55:0] frac_numo_5;  //result of addition
+reg[55:0] frac_numo_5;  //result of addition [55]:sign  [54]:carry  [53]: 1.   [52:27]: fraction  [26]: rounding
 reg[8:0] expo_numo_5;
 reg isInf_5;
-reg[4:0] frac_shift_5;
-wire[4:0] frac_shift;
 wire[54:0] frac_add;
-//assign frac_add=()
+
 always@(posedge clk)begin  //5th
-	if(frac_num1_4[55]==frac_num2_4[55]) begin frac_numo_5[55]<=frac_num1_4[55]; frac_numo_5[54:0]<={frac_num1_4[53:25]+frac_num2_4[53:25],25'b0}; end
-	else if(frac_num1_4[53:27]>frac_num2_4[53:27]) begin frac_numo_5[55]<=frac_num1_4[55]; frac_numo_5[54:0]<={frac_num1_4[53:25]-frac_num2_4[53:25],25'b0}; end
-	else begin frac_numo_5[55]<=frac_num2_4[55]; frac_numo_5[54:0]<={frac_num2_4[53:25]-frac_num1_4[53:25],25'b0}; end
-	frac_shift_5<=frac_shift;
+	if(frac_num1_4[55]==frac_num2_4[55]) begin frac_numo_5[55]<=frac_num1_4[55]; frac_numo_5[54:26]<=frac_num1_4[53:26]+frac_num2_4[53:26]; end
+	else if(compare_abs_4) begin frac_numo_5[55]<=frac_num1_4[55]; frac_numo_5[54:26]<=frac_num1_4[53:26]-frac_num2_4[53:26]; end
+	else begin frac_numo_5[55]<=frac_num2_4[55]; frac_numo_5[54:25]<=frac_num2_4[53:26]-frac_num1_4[53:26]; end
 	isInf_5<=isInf_4;
 	expo_numo_5<=expo_numo_4;
 end
-LZA_fraction lza_fraction1(.num1({frac_num1_4[55],(frac_num1_4[55]?~frac_num1_4[54:25]:frac_num1_4[54:25])}),.num2({frac_num2_4[55],(frac_num2_4[55]?~frac_num2_4[54:25]:frac_num2_4[54:25])}),.n(frac_shift));
-//LZA_fraction lza_fraction1(.num1(frac_num1_4[55:25]),.num2({frac_num2_4[55],(frac_num2_4[55]^frac_num1_4[55])?~frac_num2_4[54:25]:frac_num2_4[54:25]}),.n(frac_shift));
-//LZA_fraction lza_fraction1(.num1(frac_num1_4[55:25]),.num2({frac_num2_4[55],frac_num2_4[54:25]}),.n(frac_shift));
+
+
 //6th: shift frac_numo to do the normalization
 reg[55:0] frac_numo_6;
 reg[8:0] expo_numo_6;
 reg isZero_6;
 reg isInf_6;
+wire[4:0] frac_shift;
 always@(posedge clk)begin    //6th
-	frac_numo_6[53:26]<=frac_numo_5[54:27]<<frac_shift_5;
-	expo_numo_6<=expo_numo_5+9'd1-{4'b0,frac_shift_5};
-	isZero_6<=(frac_shift_5!=5'd29);
+	frac_numo_6[53:25]<=frac_numo_5[54:26]<<frac_shift;
+	expo_numo_6<=expo_numo_5+9'd1-{4'b0,frac_shift};
+	isZero_6<=(frac_shift!=5'd29);
 
 	isInf_6<=isInf_5;
 	frac_numo_6[55]<=frac_numo_5[55];	
 end
-
+LZC_fraction lzc_fraction(.x({frac_numo_5[54:26],3'b100}),.n(frac_shift)	);
 
 
 //7th: change fraction and exponent value to unum format
@@ -187,7 +187,7 @@ endmodule
 
 //LZC(leading zero counter) module is designed based on MODULAR DESIGN OF FAST LEADING ZEROS COUNTING CIRCUIT (http://iris.elf.stuba.sk/JEEEC/data/pdf/6_115-05.pdf)
 module LZC(
-			input[30:0] x1,//[32:1] unum  [0]:1
+			input[30:0] x1,
 			output[4:0] n
 			);
 wire[7:0] a;
@@ -225,37 +225,20 @@ NLC NLC1(.x(x[27:24]),	.a(a[1]), 	.z(z[3:2])  );
 NLC NLC0(.x(x[31:28]),	.a(a[0]), 	.z(z[1:0])  );
 endmodule
 
-module LZA_fraction(
-			input[30:0] num1,
-			input[30:0] num2,
+
+module LZC_fraction(
+			input[31:0] x,
 			output[4:0] n
 			);
 wire[7:0] a;
 wire[15:0] z;
-wire[31:0] x;
 reg [1:0] n1;
 wire[2:0] y;
-wire [30:0] LOP_T, LOP_G, LOP_Z; 
-wire[30:0] LOP;
 assign n[1:0]=n1[1:0];
 assign n[4:2]=y;
 
-assign LOP_T[30:0] = num1[30:0] ^ num2[30:0]; 
-assign LOP_G[30:0] = num1[30:0] & num2[30:0]; 
-assign LOP_Z[30:0] = ~(num1[30:0] | num2[30:0]);
-
-assign LOP[30:0] = {(LOP_T[30:2] & LOP_G[29:1] & ~LOP_Z[28:0] ) |
-					(~LOP_T[30:2] & LOP_Z[29:1] & ~LOP_Z[28:0] ) |
-					(LOP_T[30:2] & LOP_Z[29:1] & ~LOP_G[28:0] ) |
-					(~LOP_T[30:2] & LOP_G[29:1] & ~LOP_G[28:0] ), ~LOP_T[0], 1'b1};
-					
-
-					
-					
-assign x={1'b0,LOP};
-
 always@(*)begin
-	
+
 	case(y)
 	3'b000: n1[1:0]=z[1:0];
 	3'b001: n1[1:0]=z[3:2];
@@ -277,6 +260,7 @@ NLC NLC2(.x(x[23:20]),	.a(a[2]), 	.z(z[5:4])  );
 NLC NLC1(.x(x[27:24]),	.a(a[1]), 	.z(z[3:2])  );
 NLC NLC0(.x(x[31:28]),	.a(a[0]), 	.z(z[1:0])  );
 endmodule
+
 
 
 module BNE(

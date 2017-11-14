@@ -1,5 +1,5 @@
 Analysis & Synthesis report for unum_adder
-Sun Nov 12 14:55:49 2017
+Mon Nov 13 01:17:36 2017
 Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
 
 
@@ -14,16 +14,16 @@ Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Analysis & Synthesis RAM Summary
-  9. Registers Removed During Synthesis
- 10. General Register Statistics
- 11. Registers Packed Into Inferred Megafunctions
- 12. Multiplexer Restructuring Statistics (Restructuring Performed)
- 13. Source assignments for altshift_taps:expo_numo_3_rtl_0|shift_taps_96m:auto_generated|altsyncram_tk31:altsyncram4
- 14. Parameter Settings for Inferred Entity Instance: altshift_taps:expo_numo_3_rtl_0
- 15. altshift_taps Parameter Settings by Entity Instance
- 16. Port Connectivity Checks: "LZA_fraction:lza_fraction1|NLC:NLC0"
- 17. Port Connectivity Checks: "LZA_fraction:lza_fraction1|NLC:NLC7"
- 18. Port Connectivity Checks: "LZC:lzc1|NLC:NLC7"
+  9. General Register Statistics
+ 10. Registers Packed Into Inferred Megafunctions
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Source assignments for altshift_taps:expo_numo_3_rtl_0|shift_taps_96m:auto_generated|altsyncram_tk31:altsyncram4
+ 13. Parameter Settings for Inferred Entity Instance: altshift_taps:expo_numo_3_rtl_0
+ 14. altshift_taps Parameter Settings by Entity Instance
+ 15. Port Connectivity Checks: "LZC_fraction:lzc_fraction"
+ 16. Port Connectivity Checks: "LZC:lzc2"
+ 17. Port Connectivity Checks: "LZC:lzc1|NLC:NLC7"
+ 18. Port Connectivity Checks: "LZC:lzc1"
  19. Post-Synthesis Netlist Statistics for Top Partition
  20. Elapsed Time Per Partition
  21. Analysis & Synthesis Messages
@@ -53,15 +53,15 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Nov 12 14:55:49 2017       ;
+; Analysis & Synthesis Status        ; Successful - Mon Nov 13 01:17:36 2017       ;
 ; Quartus Prime Version              ; 17.0.0 Build 595 04/25/2017 SJ Lite Edition ;
 ; Revision Name                      ; unum_adder                                  ;
 ; Top-level Entity Name              ; unum_adder                                  ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 1,711                                       ;
-;     Total combinational functions  ; 1,649                                       ;
-;     Dedicated logic registers      ; 462                                         ;
-; Total registers                    ; 462                                         ;
+; Total logic elements               ; 1,339                                       ;
+;     Total combinational functions  ; 1,276                                       ;
+;     Dedicated logic registers      ; 408                                         ;
+; Total registers                    ; 408                                         ;
 ; Total pins                         ; 97                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 39                                          ;
@@ -169,7 +169,7 @@ agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.0%      ;
+;     Processor 2            ;   0.1%      ;
 ;     Processor 3            ;   0.0%      ;
 ;     Processor 4            ;   0.0%      ;
 +----------------------------+-------------+
@@ -199,20 +199,20 @@ agreement for further details.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 1,711     ;
+; Estimated Total logic elements              ; 1,339     ;
 ;                                             ;           ;
-; Total combinational functions               ; 1649      ;
+; Total combinational functions               ; 1276      ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 583       ;
-;     -- 3 input functions                    ; 877       ;
-;     -- <=2 input functions                  ; 189       ;
+;     -- 4 input functions                    ; 487       ;
+;     -- 3 input functions                    ; 682       ;
+;     -- <=2 input functions                  ; 107       ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 1259      ;
-;     -- arithmetic mode                      ; 390       ;
+;     -- normal mode                          ; 1047      ;
+;     -- arithmetic mode                      ; 229       ;
 ;                                             ;           ;
-; Total registers                             ; 462       ;
-;     -- Dedicated logic registers            ; 462       ;
+; Total registers                             ; 408       ;
+;     -- Dedicated logic registers            ; 408       ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
 ; I/O pins                                    ; 97        ;
@@ -221,9 +221,9 @@ agreement for further details.
 ; Embedded Multiplier 9-bit elements          ; 0         ;
 ;                                             ;           ;
 ; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 475       ;
-; Total fan-out                               ; 6774      ;
-; Average fan-out                             ; 2.92      ;
+; Maximum fan-out                             ; 421       ;
+; Total fan-out                               ; 5440      ;
+; Average fan-out                             ; 2.88      ;
 +---------------------------------------------+-----------+
 
 
@@ -232,15 +232,7 @@ agreement for further details.
 +----------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------+-----------------+--------------+
 ; Compilation Hierarchy Node             ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                   ; Entity Name     ; Library Name ;
 +----------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------+-----------------+--------------+
-; |unum_adder                            ; 1649 (1440)         ; 462 (458)                 ; 39          ; 0            ; 0       ; 0         ; 97   ; 0            ; |unum_adder                                                                                           ; unum_adder      ; work         ;
-;    |LZA_fraction:lza_fraction1|        ; 126 (75)            ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZA_fraction:lza_fraction1                                                                ; LZA_fraction    ; work         ;
-;       |BNE:BNE1|                       ; 15 (15)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZA_fraction:lza_fraction1|BNE:BNE1                                                       ; BNE             ; work         ;
-;       |NLC:NLC0|                       ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZA_fraction:lza_fraction1|NLC:NLC0                                                       ; NLC             ; work         ;
-;       |NLC:NLC1|                       ; 5 (5)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZA_fraction:lza_fraction1|NLC:NLC1                                                       ; NLC             ; work         ;
-;       |NLC:NLC2|                       ; 5 (5)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZA_fraction:lza_fraction1|NLC:NLC2                                                       ; NLC             ; work         ;
-;       |NLC:NLC3|                       ; 5 (5)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZA_fraction:lza_fraction1|NLC:NLC3                                                       ; NLC             ; work         ;
-;       |NLC:NLC4|                       ; 14 (14)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZA_fraction:lza_fraction1|NLC:NLC4                                                       ; NLC             ; work         ;
-;       |NLC:NLC5|                       ; 4 (4)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZA_fraction:lza_fraction1|NLC:NLC5                                                       ; NLC             ; work         ;
+; |unum_adder                            ; 1276 (1158)         ; 408 (404)                 ; 39          ; 0            ; 0       ; 0         ; 97   ; 0            ; |unum_adder                                                                                           ; unum_adder      ; work         ;
 ;    |LZC:lzc1|                          ; 38 (10)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZC:lzc1                                                                                  ; LZC             ; work         ;
 ;       |BNE:BNE1|                       ; 12 (12)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZC:lzc1|BNE:BNE1                                                                         ; BNE             ; work         ;
 ;       |NLC:NLC0|                       ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZC:lzc1|NLC:NLC0                                                                         ; NLC             ; work         ;
@@ -261,6 +253,15 @@ agreement for further details.
 ;       |NLC:NLC5|                       ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZC:lzc2|NLC:NLC5                                                                         ; NLC             ; work         ;
 ;       |NLC:NLC6|                       ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZC:lzc2|NLC:NLC6                                                                         ; NLC             ; work         ;
 ;       |NLC:NLC7|                       ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZC:lzc2|NLC:NLC7                                                                         ; NLC             ; work         ;
+;    |LZC_fraction:lzc_fraction|         ; 35 (15)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZC_fraction:lzc_fraction                                                                 ; LZC_fraction    ; work         ;
+;       |BNE:BNE1|                       ; 12 (12)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZC_fraction:lzc_fraction|BNE:BNE1                                                        ; BNE             ; work         ;
+;       |NLC:NLC0|                       ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZC_fraction:lzc_fraction|NLC:NLC0                                                        ; NLC             ; work         ;
+;       |NLC:NLC1|                       ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZC_fraction:lzc_fraction|NLC:NLC1                                                        ; NLC             ; work         ;
+;       |NLC:NLC2|                       ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZC_fraction:lzc_fraction|NLC:NLC2                                                        ; NLC             ; work         ;
+;       |NLC:NLC3|                       ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZC_fraction:lzc_fraction|NLC:NLC3                                                        ; NLC             ; work         ;
+;       |NLC:NLC4|                       ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZC_fraction:lzc_fraction|NLC:NLC4                                                        ; NLC             ; work         ;
+;       |NLC:NLC5|                       ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZC_fraction:lzc_fraction|NLC:NLC5                                                        ; NLC             ; work         ;
+;       |NLC:NLC6|                       ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|LZC_fraction:lzc_fraction|NLC:NLC6                                                        ; NLC             ; work         ;
 ;    |altshift_taps:expo_numo_3_rtl_0|   ; 7 (0)               ; 4 (0)                     ; 39          ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|altshift_taps:expo_numo_3_rtl_0                                                           ; altshift_taps   ; work         ;
 ;       |shift_taps_96m:auto_generated|  ; 7 (2)               ; 4 (2)                     ; 39          ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|altshift_taps:expo_numo_3_rtl_0|shift_taps_96m:auto_generated                             ; shift_taps_96m  ; work         ;
 ;          |altsyncram_tk31:altsyncram4| ; 0 (0)               ; 0 (0)                     ; 39          ; 0            ; 0       ; 0         ; 0    ; 0            ; |unum_adder|altshift_taps:expo_numo_3_rtl_0|shift_taps_96m:auto_generated|altsyncram_tk31:altsyncram4 ; altsyncram_tk31 ; work         ;
@@ -278,26 +279,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
 
 
-+--------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                             ;
-+---------------------------------------+----------------------------------------+
-; Register name                         ; Reason for Removal                     ;
-+---------------------------------------+----------------------------------------+
-; frac_num1_4[54]                       ; Stuck at GND due to stuck port data_in ;
-; frac_num2_4[54]                       ; Stuck at GND due to stuck port data_in ;
-; frac_numo_5[54]                       ; Lost fanout                            ;
-; Total Number of Removed Registers = 3 ;                                        ;
-+---------------------------------------+----------------------------------------+
-
-
 +------------------------------------------------------+
 ; General Register Statistics                          ;
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 462   ;
-; Number of registers using Synchronous Clear  ; 90    ;
-; Number of registers using Synchronous Load   ; 111   ;
+; Total registers                              ; 408   ;
+; Number of registers using Synchronous Clear  ; 53    ;
+; Number of registers using Synchronous Load   ; 85    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 0     ;
@@ -329,41 +318,38 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output  ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|runum_o_7[12]   ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|frac_numo_6[38] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|runum_o_7[14]   ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|frac_numo_6[40] ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|frac_numo_6[42] ;
-; 3:1                ; 27 bits   ; 54 LEs        ; 54 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|frac_numo_5[39] ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|temp2_2[15]     ;
+; 3:1                ; 29 bits   ; 58 LEs        ; 58 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|frac_numo_5[49] ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|temp1_2[14]     ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|temp1_2[16]     ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|temp2_2[14]     ;
 ; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|temp2_2[17]     ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|temp1_2[14]     ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|temp1_2[19]     ;
 ; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|runum_o_7[6]    ;
 ; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|frac_numo_6[45] ;
-; 8:1                ; 2 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|frac_shift_5[0] ;
-; 4:1                ; 22 bits   ; 44 LEs        ; 44 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|frac_num1_4[41] ;
-; 4:1                ; 22 bits   ; 44 LEs        ; 44 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|frac_num2_4[45] ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|temp2_2[23]     ;
 ; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|temp1_2[23]     ;
-; 8:1                ; 2 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|unum2_shift[1]  ;
-; 8:1                ; 2 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|unum1_shift[0]  ;
-; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|runum_o_7[1]    ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|temp2_2[23]     ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|unum1_shift[1]  ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|unum2_shift[0]  ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|runum_o_7[2]    ;
 ; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|frac_numo_6[50] ;
-; 5:1                ; 12 bits   ; 36 LEs        ; 24 LEs               ; 12 LEs                 ; Yes        ; |unum_adder|frac_num2_4[10] ;
-; 5:1                ; 5 bits    ; 15 LEs        ; 10 LEs               ; 5 LEs                  ; Yes        ; |unum_adder|frac_num2_4[25] ;
-; 5:1                ; 5 bits    ; 15 LEs        ; 10 LEs               ; 5 LEs                  ; Yes        ; |unum_adder|frac_num1_4[30] ;
-; 5:1                ; 5 bits    ; 15 LEs        ; 10 LEs               ; 5 LEs                  ; Yes        ; |unum_adder|frac_num2_4[29] ;
-; 5:1                ; 6 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; Yes        ; |unum_adder|frac_num2_4[16] ;
-; 5:1                ; 12 bits   ; 36 LEs        ; 24 LEs               ; 12 LEs                 ; Yes        ; |unum_adder|frac_num1_4[1]  ;
-; 5:1                ; 5 bits    ; 15 LEs        ; 10 LEs               ; 5 LEs                  ; Yes        ; |unum_adder|frac_num1_4[23] ;
-; 5:1                ; 6 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; Yes        ; |unum_adder|frac_num1_4[20] ;
-; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|temp2_2[27]     ;
-; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|temp1_2[26]     ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|round           ;
+; 5:1                ; 12 bits   ; 36 LEs        ; 24 LEs               ; 12 LEs                 ; Yes        ; |unum_adder|frac_num1_4[53] ;
+; 5:1                ; 12 bits   ; 36 LEs        ; 24 LEs               ; 12 LEs                 ; Yes        ; |unum_adder|frac_num2_4[48] ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|temp1_2[25]     ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|temp2_2[26]     ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|runum_o_7[0]    ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|frac_numo_6[52] ;
-; 6:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |unum_adder|frac_num2_4[14] ;
-; 6:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |unum_adder|frac_num1_4[14] ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|temp2_2[29]     ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |unum_adder|frac_num1_4[41] ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |unum_adder|frac_num2_4[40] ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 12 LEs               ; 4 LEs                  ; Yes        ; |unum_adder|frac_num1_4[37] ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 12 LEs               ; 4 LEs                  ; Yes        ; |unum_adder|frac_num2_4[34] ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|temp1_2[28]     ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |unum_adder|temp2_2[27]     ;
+; 7:1                ; 4 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|frac_num1_4[31] ;
+; 7:1                ; 4 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |unum_adder|frac_num2_4[30] ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 8 LEs                ; 2 LEs                  ; Yes        ; |unum_adder|frac_num1_4[29] ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 8 LEs                ; 2 LEs                  ; Yes        ; |unum_adder|frac_num2_4[29] ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
 
 
@@ -404,22 +390,23 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------------------+---------------------------------+
 
 
-+-----------------------------------------------------------------+
-; Port Connectivity Checks: "LZA_fraction:lza_fraction1|NLC:NLC0" ;
-+------+-------+----------+---------------------------------------+
-; Port ; Type  ; Severity ; Details                               ;
-+------+-------+----------+---------------------------------------+
-; x[3] ; Input ; Info     ; Stuck at GND                          ;
-+------+-------+----------+---------------------------------------+
++-------------------------------------------------------+
+; Port Connectivity Checks: "LZC_fraction:lzc_fraction" ;
++---------+-------+----------+--------------------------+
+; Port    ; Type  ; Severity ; Details                  ;
++---------+-------+----------+--------------------------+
+; x[1..0] ; Input ; Info     ; Stuck at GND             ;
+; x[2]    ; Input ; Info     ; Stuck at VCC             ;
++---------+-------+----------+--------------------------+
 
 
-+-----------------------------------------------------------------+
-; Port Connectivity Checks: "LZA_fraction:lza_fraction1|NLC:NLC7" ;
-+------+-------+----------+---------------------------------------+
-; Port ; Type  ; Severity ; Details                               ;
-+------+-------+----------+---------------------------------------+
-; x[0] ; Input ; Info     ; Stuck at VCC                          ;
-+------+-------+----------+---------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "LZC:lzc2"                                                                                                                                                                         ;
++------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                                                                                                                                            ;
++------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; x1   ; Input ; Warning  ; Input port expression (32 bits) is wider than the input port (31 bits) it drives.  The 1 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
++------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------+
@@ -432,31 +419,40 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------+-------+----------+---------------------+
 
 
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "LZC:lzc1"                                                                                                                                                                         ;
++------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                                                                                                                                            ;
++------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; x1   ; Input ; Warning  ; Input port expression (32 bits) is wider than the input port (31 bits) it drives.  The 1 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
++------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 +-----------------------------------------------------+
 ; Post-Synthesis Netlist Statistics for Top Partition ;
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 97                          ;
-; cycloneiii_ff         ; 462                         ;
-;     SCLR              ; 44                          ;
-;     SCLR SLD          ; 46                          ;
-;     SLD               ; 65                          ;
-;     plain             ; 307                         ;
-; cycloneiii_lcell_comb ; 1649                        ;
-;     arith             ; 390                         ;
-;         2 data inputs ; 72                          ;
-;         3 data inputs ; 318                         ;
-;     normal            ; 1259                        ;
-;         0 data inputs ; 1                           ;
-;         1 data inputs ; 8                           ;
-;         2 data inputs ; 108                         ;
-;         3 data inputs ; 559                         ;
-;         4 data inputs ; 583                         ;
+; cycloneiii_ff         ; 408                         ;
+;     SCLR              ; 41                          ;
+;     SCLR SLD          ; 12                          ;
+;     SLD               ; 73                          ;
+;     plain             ; 282                         ;
+; cycloneiii_lcell_comb ; 1276                        ;
+;     arith             ; 229                         ;
+;         2 data inputs ; 12                          ;
+;         3 data inputs ; 217                         ;
+;     normal            ; 1047                        ;
+;         0 data inputs ; 4                           ;
+;         1 data inputs ; 6                           ;
+;         2 data inputs ; 85                          ;
+;         3 data inputs ; 465                         ;
+;         4 data inputs ; 487                         ;
 ; cycloneiii_ram_block  ; 13                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 11.00                       ;
-; Average LUT depth     ; 5.38                        ;
+; Max LUT depth         ; 12.00                       ;
+; Average LUT depth     ; 5.54                        ;
 +-----------------------+-----------------------------+
 
 
@@ -465,7 +461,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:05     ;
+; Top            ; 00:00:03     ;
 +----------------+--------------+
 
 
@@ -475,23 +471,23 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
-    Info: Processing started: Sun Nov 12 14:55:30 2017
+    Info: Processing started: Mon Nov 13 01:17:19 2017
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off unum_adder -c unum_adder
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 5 design units, including 5 entities, in source file unum_adder.v
     Info (12023): Found entity 1: unum_adder File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v Line: 8
     Info (12023): Found entity 2: LZC File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v Line: 189
-    Info (12023): Found entity 3: LZA_fraction File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v Line: 228
-    Info (12023): Found entity 4: BNE File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v Line: 277
-    Info (12023): Found entity 5: NLC File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v Line: 288
+    Info (12023): Found entity 3: LZC_fraction File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v Line: 229
+    Info (12023): Found entity 4: BNE File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v Line: 266
+    Info (12023): Found entity 5: NLC File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v Line: 277
 Info (12127): Elaborating entity "unum_adder" for the top level hierarchy
 Warning (10230): Verilog HDL assignment warning at unum_adder.v(179): truncated value with size 32 to match size of target (31) File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v Line: 179
 Warning (10230): Verilog HDL assignment warning at unum_adder.v(180): truncated value with size 32 to match size of target (31) File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v Line: 180
 Info (12128): Elaborating entity "LZC" for hierarchy "LZC:lzc1" File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v Line: 49
 Info (12128): Elaborating entity "BNE" for hierarchy "LZC:lzc1|BNE:BNE1" File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v Line: 217
 Info (12128): Elaborating entity "NLC" for hierarchy "LZC:lzc1|NLC:NLC7" File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v Line: 218
-Info (12128): Elaborating entity "LZA_fraction" for hierarchy "LZA_fraction:lza_fraction1" File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v Line: 141
+Info (12128): Elaborating entity "LZC_fraction" for hierarchy "LZC_fraction:lzc_fraction" File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v Line: 157
 Info (19000): Inferred 1 megafunctions from design logic
     Info (276034): Inferred altshift_taps megafunction from the following design logic: "expo_numo_3_rtl_0"
         Info (286033): Parameter NUMBER_OF_TAPS set to 1
@@ -512,19 +508,19 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/cntr
     Info (12023): Found entity 1: cntr_6pf File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/db/cntr_6pf.tdf Line: 25
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_ogc.tdf
     Info (12023): Found entity 1: cmpr_ogc File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/db/cmpr_ogc.tdf Line: 23
+Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 1 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 1873 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1542 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 65 input pins
     Info (21059): Implemented 32 output pins
-    Info (21061): Implemented 1763 logic cells
+    Info (21061): Implemented 1432 logic cells
     Info (21064): Implemented 13 RAM segments
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 667 megabytes
-    Info: Processing ended: Sun Nov 12 14:55:49 2017
-    Info: Elapsed time: 00:00:19
-    Info: Total CPU time (on all processors): 00:00:34
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 4 warnings
+    Info: Peak virtual memory: 679 megabytes
+    Info: Processing ended: Mon Nov 13 01:17:36 2017
+    Info: Elapsed time: 00:00:17
+    Info: Total CPU time (on all processors): 00:00:31
 
 

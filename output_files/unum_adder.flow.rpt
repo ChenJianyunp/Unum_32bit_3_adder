@@ -1,5 +1,5 @@
 Flow report for unum_adder
-Sun Nov 12 14:56:28 2017
+Mon Nov 13 01:18:11 2017
 Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
 
 
@@ -41,17 +41,17 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Sun Nov 12 14:56:28 2017       ;
+; Flow Status                        ; Successful - Mon Nov 13 01:18:11 2017       ;
 ; Quartus Prime Version              ; 17.0.0 Build 595 04/25/2017 SJ Lite Edition ;
 ; Revision Name                      ; unum_adder                                  ;
 ; Top-level Entity Name              ; unum_adder                                  ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE6F17C8                                 ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 1,706 / 6,272 ( 27 % )                      ;
-;     Total combinational functions  ; 1,649 / 6,272 ( 26 % )                      ;
-;     Dedicated logic registers      ; 462 / 6,272 ( 7 % )                         ;
-; Total registers                    ; 462                                         ;
+; Total logic elements               ; 1,334 / 6,272 ( 21 % )                      ;
+;     Total combinational functions  ; 1,276 / 6,272 ( 20 % )                      ;
+;     Dedicated logic registers      ; 408 / 6,272 ( 7 % )                         ;
+; Total registers                    ; 408                                         ;
 ; Total pins                         ; 97 / 180 ( 54 % )                           ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 39 / 276,480 ( < 1 % )                      ;
@@ -65,7 +65,7 @@ agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/12/2017 14:55:30 ;
+; Start date & time ; 11/13/2017 01:17:20 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; unum_adder          ;
 +-------------------+---------------------+
@@ -76,7 +76,7 @@ agreement for further details.
 +--------------------------------------+----------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                      ; Value                                  ; Default Value ; Entity Name ; Section Id     ;
 +--------------------------------------+----------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID                ; 27332940056100.151049493007692         ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                ; 24062491136.151053224006460            ; --            ; --          ; --             ;
 ; EDA_DESIGN_INSTANCE_NAME             ; i1                                     ; --            ; --          ; --             ;
 ; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; unum_adder                             ; --            ; --          ; eda_simulation ;
 ; EDA_OUTPUT_DATA_FORMAT               ; Verilog Hdl                            ; --            ; --          ; eda_simulation ;
@@ -103,12 +103,12 @@ agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:18     ; 1.0                     ; 667 MB              ; 00:00:34                           ;
-; Fitter                    ; 00:00:17     ; 1.1                     ; 1390 MB             ; 00:00:22                           ;
-; Assembler                 ; 00:00:02     ; 1.0                     ; 565 MB              ; 00:00:01                           ;
-; TimeQuest Timing Analyzer ; 00:00:04     ; 1.2                     ; 658 MB              ; 00:00:03                           ;
-; EDA Netlist Writer        ; 00:00:04     ; 1.0                     ; 547 MB              ; 00:00:03                           ;
-; Total                     ; 00:00:45     ; --                      ; --                  ; 00:01:03                           ;
+; Analysis & Synthesis      ; 00:00:16     ; 1.0                     ; 679 MB              ; 00:00:30                           ;
+; Fitter                    ; 00:00:15     ; 1.1                     ; 1393 MB             ; 00:00:17                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 558 MB              ; 00:00:01                           ;
+; TimeQuest Timing Analyzer ; 00:00:03     ; 1.2                     ; 656 MB              ; 00:00:03                           ;
+; EDA Netlist Writer        ; 00:00:03     ; 1.0                     ; 544 MB              ; 00:00:03                           ;
+; Total                     ; 00:00:39     ; --                      ; --                  ; 00:00:54                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

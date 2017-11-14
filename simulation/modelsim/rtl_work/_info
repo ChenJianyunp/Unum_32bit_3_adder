@@ -9,21 +9,21 @@ z2
 cModel Technology
 Z0 dF:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim
 vBNE
-Z1 !s110 1510526017
+Z1 !s110 1510532188
 !i10b 1
-!s100 4?ab[Q2RA9DDh:3h;6hGJ0
-I>3o@gnL9^WFb6dfa6<59Q0
+!s100 KS?mk695dLFz15_FW0d5i0
+IW0iIbMTZlSUR;9RUgGV841
 Z2 VDg1SIo80bB@j0V0VzS_@n1
 R0
-Z3 w1510525994
+Z3 w1510532177
 Z4 8F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v
 Z5 FF:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v
-L0 282
+L0 266
 Z6 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z7 !s108 1510526017.000000
+Z7 !s108 1510532188.000000
 Z8 !s107 F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v|
 Z9 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder|F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v|
 !i113 1
@@ -31,29 +31,6 @@ Z10 o-vlog01compat -work work
 Z11 !s92 -vlog01compat -work work +incdir+F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder
 Z12 tCvgOpt 0
 n@b@n@e
-vLZA_fraction
-R1
-!i10b 1
-!s100 VGS>j[O^URleU14oO4cKg3
-I:Fn;4MCm8:BLlBS9K;BFe0
-R2
-R0
-R3
-R4
-R5
-L0 228
-R6
-r1
-!s85 0
-31
-R7
-R8
-R9
-!i113 1
-R10
-R11
-R12
-n@l@z@a_fraction
 vLZC
 R1
 !i10b 1
@@ -77,17 +54,40 @@ R10
 R11
 R12
 n@l@z@c
-vNLC
+vLZC_fraction
 R1
 !i10b 1
-!s100 b]:;WMme]mz@ZbJ11h93V1
-IV<V6mCjU[2^`XARLgb5lP0
+!s100 Be@DCU7<;WzAJ]VN[UcjF1
+I3l2L[cN9gnb58b3hHcHiz1
 R2
 R0
 R3
 R4
 R5
-L0 293
+L0 229
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+R12
+n@l@z@c_fraction
+vNLC
+R1
+!i10b 1
+!s100 =oj[D7JP^d3b9jP=45F:<2
+I9DeK[XLh_J;nnGG>JIgYQ1
+R2
+R0
+R3
+R4
+R5
+L0 277
 R6
 r1
 !s85 0
@@ -103,8 +103,8 @@ n@n@l@c
 vunum_adder
 R1
 !i10b 1
-!s100 n`bNoD;XehLm>XA_e4bk?3
-IUGQWXl;5A@1]mzGBN5]BQ0
+!s100 iTSYX^aV:m3Q_bPS2YDkd0
+IUW1[Q6[NCYSj@BgbK;[9F2
 R2
 R0
 R3
@@ -125,11 +125,11 @@ R12
 vunum_adder_vlg_tst
 R1
 !i10b 1
-!s100 hf`TX0Z^chA][ZlO1a_0?0
-I[`QLM5@1zg1Ug[NFQ<FQQ0
+!s100 <45172MMDILD2fG6n@2zc0
+I_NPO0=cQ5hJh87:hF;`LN2
 R2
 R0
-w1510481418
+w1510531388
 8F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt
 FF:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt
 L0 29
