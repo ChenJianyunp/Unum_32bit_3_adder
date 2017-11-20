@@ -10,52 +10,54 @@
 # Copying D:/quartus/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
 # Modifying modelsim.ini
 # 
-# vlog -vlog01compat -work work +incdir+F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder {F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v}
+# vlog -vlog01compat -work work +incdir+F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder {F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/unum_adder.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 01:16:28 on Nov 13,2017
-# vlog -reportprogress 300 -vlog01compat -work work "+incdir+F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder" F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v 
+# Start time: 23:20:43 on Nov 19,2017
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder" F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/unum_adder.v 
 # -- Compiling module unum_adder
 # -- Compiling module LZC
+# -- Compiling module LZA_fraction
 # -- Compiling module LZC_fraction
 # -- Compiling module BNE
 # -- Compiling module NLC
 # 
 # Top level modules:
 # 	unum_adder
-# End time: 01:16:28 on Nov 13,2017, Elapsed time: 0:00:00
+# 	LZC_fraction
+# End time: 23:20:43 on Nov 19,2017, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
-# vlog -vlog01compat -work work +incdir+F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim {F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt}
+# vlog -vlog01compat -work work +incdir+F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/simulation/modelsim {F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 01:16:28 on Nov 13,2017
-# vlog -reportprogress 300 -vlog01compat -work work "+incdir+F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim" F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt 
+# Start time: 23:20:44 on Nov 19,2017
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/simulation/modelsim" F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt 
 # -- Compiling module unum_adder_vlg_tst
 # 
 # Top level modules:
 # 	unum_adder_vlg_tst
-# End time: 01:16:28 on Nov 13,2017, Elapsed time: 0:00:00
+# End time: 23:20:44 on Nov 19,2017, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
 # vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs="+acc"  unum_adder_vlg_tst
 # vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs=""+acc"" unum_adder_vlg_tst 
-# Start time: 01:16:28 on Nov 13,2017
+# Start time: 23:20:44 on Nov 19,2017
 # Loading work.unum_adder_vlg_tst
 # Loading work.unum_adder
 # Loading work.LZC
 # Loading work.BNE
 # Loading work.NLC
-# Loading work.LZC_fraction
-# ** Warning: (vsim-3015) F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v(49): [PCDPC] - Port size (31) does not match connection size (32) for port 'x1'. The port definition is at: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v(190).
-#    Time: 0 ps  Iteration: 0  Instance: /unum_adder_vlg_tst/i1/lzc1 File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v
-# ** Warning: (vsim-3015) F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v(50): [PCDPC] - Port size (31) does not match connection size (32) for port 'x1'. The port definition is at: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v(190).
-#    Time: 0 ps  Iteration: 0  Instance: /unum_adder_vlg_tst/i1/lzc2 File: F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v
+# Loading work.LZA_fraction
+# ** Warning: (vsim-3015) F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/unum_adder.v(49): [PCDPC] - Port size (31) does not match connection size (32) for port 'x1'. The port definition is at: F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/unum_adder.v(199).
+#    Time: 0 ps  Iteration: 0  Instance: /unum_adder_vlg_tst/i1/lzc1 File: F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/unum_adder.v
+# ** Warning: (vsim-3015) F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/unum_adder.v(50): [PCDPC] - Port size (31) does not match connection size (32) for port 'x1'. The port definition is at: F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/unum_adder.v(199).
+#    Time: 0 ps  Iteration: 0  Instance: /unum_adder_vlg_tst/i1/lzc2 File: F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/unum_adder.v
 # 
 # add wave *
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: 7566-1745B  Hostname: DESKTOP-O4KCONL  ProcessID: 11580
-#           Attempting to use alternate WLF file "./wlfts9fdf8".
+#           Attempting to use alternate WLF file "./wlftcsht0v".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlfts9fdf8
+#           Using alternate file: ./wlftcsht0v
 # view structure
 # .main_pane.structure.interior.cs.body.struct
 # view signals
@@ -66,8 +68,5 @@ run
 run
 run
 run
-# Error opening F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim/[PCDPC] - Port size (31) does not match connection size 
-# Path name 'F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim/[PCDPC] - Port size (31) does not match connection size ' doesn't exist.
-# A time value could not be extracted from the current line
-# End time: 01:30:09 on Nov 13,2017, Elapsed time: 0:13:41
-# Errors: 1, Warnings: 4
+# End time: 23:21:04 on Nov 19,2017, Elapsed time: 0:00:20
+# Errors: 0, Warnings: 4

@@ -1,14 +1,14 @@
-Fitter Status : Successful - Mon Nov 13 01:17:53 2017
-Quartus Prime Version : 17.0.0 Build 595 04/25/2017 SJ Lite Edition
+Fitter Status : Successful - Sun Nov 19 23:24:45 2017
+Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 Revision Name : unum_adder
 Top-level Entity Name : unum_adder
 Family : Cyclone IV E
 Device : EP4CE6F17C8
 Timing Models : Final
-Total logic elements : 1,334 / 6,272 ( 21 % )
-    Total combinational functions : 1,276 / 6,272 ( 20 % )
-    Dedicated logic registers : 408 / 6,272 ( 7 % )
-Total registers : 408
+Total logic elements : 1,471 / 6,272 ( 23 % )
+    Total combinational functions : 1,430 / 6,272 ( 23 % )
+    Dedicated logic registers : 416 / 6,272 ( 7 % )
+Total registers : 416
 Total pins : 97 / 180 ( 54 % )
 Total virtual pins : 0
 Total memory bits : 39 / 276,480 ( < 1 % )

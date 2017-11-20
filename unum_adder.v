@@ -1,6 +1,7 @@
 //32-bit adder Universal number(unum)-Type III with 3-bit exponent bit in pipeline structure
 //Dased on the document in http://superfri.org/superfri/article/view/137/232
 //LZC(leading zero counter) module is designed based on MODULAR DESIGN OF FAST LEADING ZEROS COUNTING CIRCUIT (http://iris.elf.stuba.sk/JEEEC/data/pdf/6_115-05.pdf)
+//LZA(leading zero anticipator) module is based on "Leading-zero anticipator (LZA) in the IBIVI RISC System/6000 floating-point execution unit"(http://ieeexplore.ieee.org/document/5389860/)
 //Designed by Jianyu CHEN, in Delft, the Netherlands, in 29th Oct, 2017
 //Email of designer: chenjy0046@gmail.com
 
@@ -130,14 +131,18 @@ reg[55:0] frac_numo_5;  //result of addition [55]:sign  [54]:carry  [53]: 1.   [
 reg[8:0] expo_numo_5;
 reg isInf_5;
 wire[54:0] frac_add;
-
+reg[4:0] frac_shift_5;
+wire[4:0] frac_shift;
 always@(posedge clk)begin  //5th
-	if(frac_num1_4[55]==frac_num2_4[55]) begin frac_numo_5[55]<=frac_num1_4[55]; frac_numo_5[54:26]<=frac_num1_4[53:26]+frac_num2_4[53:26]; end
-	else if(compare_abs_4) begin frac_numo_5[55]<=frac_num1_4[55]; frac_numo_5[54:26]<=frac_num1_4[53:26]-frac_num2_4[53:26]; end
-	else begin frac_numo_5[55]<=frac_num2_4[55]; frac_numo_5[54:25]<=frac_num2_4[53:26]-frac_num1_4[53:26]; end
+	if(frac_num1_4[55]==frac_num2_4[55]) begin frac_numo_5[55]<=frac_num1_4[55]; frac_numo_5[54:25]<=frac_num1_4[53:25]+frac_num2_4[53:25]; end
+	else if(compare_abs_4) begin frac_numo_5[55]<=frac_num1_4[55]; frac_numo_5[54:25]<=frac_num1_4[53:25]-frac_num2_4[53:25]; end
+	else begin frac_numo_5[55]<=frac_num2_4[55]; frac_numo_5[54:25]<=frac_num2_4[53:25]-frac_num1_4[53:25]; end
 	isInf_5<=isInf_4;
 	expo_numo_5<=expo_numo_4;
+	frac_shift_5<=frac_shift;
 end
+LZA_fraction lza_fraction1(.num1({frac_num1_4[55],(frac_num1_4[55]?~frac_num1_4[54:25]:frac_num1_4[54:25])}),.num2({frac_num2_4[55],(frac_num2_4[55]?~frac_num2_4[54:25]:frac_num2_4[54:25])}),.n(frac_shift));
+
 
 
 //6th: shift frac_numo to do the normalization
@@ -145,16 +150,21 @@ reg[55:0] frac_numo_6;
 reg[8:0] expo_numo_6;
 reg isZero_6;
 reg isInf_6;
-wire[4:0] frac_shift;
+wire[29:0] shift_result;
+assign shift_result=frac_numo_5[54:25]<<frac_shift_5;
 always@(posedge clk)begin    //6th
-	frac_numo_6[53:25]<=frac_numo_5[54:26]<<frac_shift;
-	expo_numo_6<=expo_numo_5+9'd1-{4'b0,frac_shift};
-	isZero_6<=(frac_shift!=5'd29);
-
+	if(shift_result[29])begin frac_numo_6[53:25]<=shift_result[29:1]; end
+	else begin frac_numo_6[53:25]<=shift_result[28:0];  end 
+	
+	
+	
+	expo_numo_6<=expo_numo_5+9'd1-{4'b0,frac_shift_5}-{4'b0,~shift_result[29]};
+	isZero_6<=(frac_shift_5!=5'd30);
+	
 	isInf_6<=isInf_5;
 	frac_numo_6[55]<=frac_numo_5[55];	
 end
-LZC_fraction lzc_fraction(.x({frac_numo_5[54:26],3'b100}),.n(frac_shift)	);
+
 
 
 //7th: change fraction and exponent value to unum format
@@ -225,6 +235,59 @@ NLC NLC1(.x(x[27:24]),	.a(a[1]), 	.z(z[3:2])  );
 NLC NLC0(.x(x[31:28]),	.a(a[0]), 	.z(z[1:0])  );
 endmodule
 
+
+module LZA_fraction(
+			input[30:0] num1,
+			input[30:0] num2,
+			output[4:0] n
+			);
+wire[7:0] a;
+wire[15:0] z;
+wire[31:0] x;
+reg [1:0] n1;
+wire[2:0] y;
+wire [30:0] LOP_T, LOP_G, LOP_Z; 
+wire[30:0] LOP;
+assign n[1:0]=n1[1:0];
+assign n[4:2]=y;
+
+assign LOP_T[30:0] = num1[30:0] ^ num2[30:0]; 
+assign LOP_G[30:0] = num1[30:0] & num2[30:0]; 
+assign LOP_Z[30:0] = ~(num1[30:0] | num2[30:0]);
+
+assign LOP[30:0] = {(LOP_T[30:2] & LOP_G[29:1] & ~LOP_Z[28:0] ) |
+					(~LOP_T[30:2] & LOP_Z[29:1] & ~LOP_Z[28:0] ) |
+					(LOP_T[30:2] & LOP_Z[29:1] & ~LOP_G[28:0] ) |
+					(~LOP_T[30:2] & LOP_G[29:1] & ~LOP_G[28:0] ), ~LOP_T[0], 1'b1};
+					
+
+					
+					
+assign x={LOP,1'b0};
+
+always@(*)begin
+	
+	case(y)
+	3'b000: n1[1:0]=z[1:0];
+	3'b001: n1[1:0]=z[3:2];
+	3'b010: n1[1:0]=z[5:4];
+	3'b011: n1[1:0]=z[7:6];
+	3'b100: n1[1:0]=z[9:8];
+	3'b101: n1[1:0]=z[11:10];
+	3'b110: n1[1:0]=z[13:12];
+	3'b111: n1[1:0]=z[15:14];
+	endcase
+end
+BNE BNE1(.a(a), .y(y));			
+NLC NLC7(.x(x[3:0]),		.a(a[7]), 	.z(z[15:14]) );
+NLC NLC6(.x(x[7:4]),		.a(a[6]), 	.z(z[13:12]) );
+NLC NLC5(.x(x[11:8]),	.a(a[5]),	.z(z[11:10]) );
+NLC NLC4(.x(x[15:12]),	.a(a[4]), 	.z(z[9:8])  );
+NLC NLC3(.x(x[19:16]),	.a(a[3]), 	.z(z[7:6])  );
+NLC NLC2(.x(x[23:20]),	.a(a[2]), 	.z(z[5:4])  );
+NLC NLC1(.x(x[27:24]),	.a(a[1]), 	.z(z[3:2])  );
+NLC NLC0(.x(x[31:28]),	.a(a[0]), 	.z(z[1:0])  );
+endmodule
 
 module LZC_fraction(
 			input[31:0] x,

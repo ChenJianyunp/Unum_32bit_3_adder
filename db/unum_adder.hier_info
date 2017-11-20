@@ -104,6 +104,11 @@ clk => frac_numo_6[50].CLK
 clk => frac_numo_6[51].CLK
 clk => frac_numo_6[52].CLK
 clk => frac_numo_6[55].CLK
+clk => frac_shift_5[0].CLK
+clk => frac_shift_5[1].CLK
+clk => frac_shift_5[2].CLK
+clk => frac_shift_5[3].CLK
+clk => frac_shift_5[4].CLK
 clk => expo_numo_5[0].CLK
 clk => expo_numo_5[1].CLK
 clk => expo_numo_5[2].CLK
@@ -114,6 +119,7 @@ clk => expo_numo_5[6].CLK
 clk => expo_numo_5[7].CLK
 clk => expo_numo_5[8].CLK
 clk => isInf_5.CLK
+clk => frac_numo_5[25].CLK
 clk => frac_numo_5[26].CLK
 clk => frac_numo_5[27].CLK
 clk => frac_numo_5[28].CLK
@@ -155,6 +161,7 @@ clk => expo_numo_4[5].CLK
 clk => expo_numo_4[6].CLK
 clk => expo_numo_4[7].CLK
 clk => expo_numo_4[8].CLK
+clk => frac_num1_4[25].CLK
 clk => frac_num1_4[26].CLK
 clk => frac_num1_4[27].CLK
 clk => frac_num1_4[28].CLK
@@ -183,7 +190,9 @@ clk => frac_num1_4[50].CLK
 clk => frac_num1_4[51].CLK
 clk => frac_num1_4[52].CLK
 clk => frac_num1_4[53].CLK
+clk => frac_num1_4[54].CLK
 clk => frac_num1_4[55].CLK
+clk => frac_num2_4[25].CLK
 clk => frac_num2_4[26].CLK
 clk => frac_num2_4[27].CLK
 clk => frac_num2_4[28].CLK
@@ -212,6 +221,7 @@ clk => frac_num2_4[50].CLK
 clk => frac_num2_4[51].CLK
 clk => frac_num2_4[52].CLK
 clk => frac_num2_4[53].CLK
+clk => frac_num2_4[54].CLK
 clk => frac_num2_4[55].CLK
 clk => isInf_3.CLK
 clk => diff_expo[0].CLK
@@ -1338,39 +1348,187 @@ z[0] <= z.DB_MAX_OUTPUT_PORT_TYPE
 z[1] <= z.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|unum_adder|LZC_fraction:lzc_fraction
-x[0] => x[0].IN1
-x[1] => x[1].IN1
-x[2] => x[2].IN1
-x[3] => x[3].IN1
-x[4] => x[4].IN1
-x[5] => x[5].IN1
-x[6] => x[6].IN1
-x[7] => x[7].IN1
-x[8] => x[8].IN1
-x[9] => x[9].IN1
-x[10] => x[10].IN1
-x[11] => x[11].IN1
-x[12] => x[12].IN1
-x[13] => x[13].IN1
-x[14] => x[14].IN1
-x[15] => x[15].IN1
-x[16] => x[16].IN1
-x[17] => x[17].IN1
-x[18] => x[18].IN1
-x[19] => x[19].IN1
-x[20] => x[20].IN1
-x[21] => x[21].IN1
-x[22] => x[22].IN1
-x[23] => x[23].IN1
-x[24] => x[24].IN1
-x[25] => x[25].IN1
-x[26] => x[26].IN1
-x[27] => x[27].IN1
-x[28] => x[28].IN1
-x[29] => x[29].IN1
-x[30] => x[30].IN1
-x[31] => x[31].IN1
+|unum_adder|LZA_fraction:lza_fraction1
+num1[0] => LOP_T[0].IN0
+num1[0] => LOP_G[0].IN0
+num1[0] => LOP_Z.IN0
+num1[1] => LOP_G[1].IN0
+num1[1] => LOP_Z.IN0
+num1[2] => LOP_T[2].IN0
+num1[2] => LOP_G[2].IN0
+num1[2] => LOP_Z.IN0
+num1[3] => LOP_T[3].IN0
+num1[3] => LOP_G[3].IN0
+num1[3] => LOP_Z.IN0
+num1[4] => LOP_T[4].IN0
+num1[4] => LOP_G[4].IN0
+num1[4] => LOP_Z.IN0
+num1[5] => LOP_T[5].IN0
+num1[5] => LOP_G[5].IN0
+num1[5] => LOP_Z.IN0
+num1[6] => LOP_T[6].IN0
+num1[6] => LOP_G[6].IN0
+num1[6] => LOP_Z.IN0
+num1[7] => LOP_T[7].IN0
+num1[7] => LOP_G[7].IN0
+num1[7] => LOP_Z.IN0
+num1[8] => LOP_T[8].IN0
+num1[8] => LOP_G[8].IN0
+num1[8] => LOP_Z.IN0
+num1[9] => LOP_T[9].IN0
+num1[9] => LOP_G[9].IN0
+num1[9] => LOP_Z.IN0
+num1[10] => LOP_T[10].IN0
+num1[10] => LOP_G[10].IN0
+num1[10] => LOP_Z.IN0
+num1[11] => LOP_T[11].IN0
+num1[11] => LOP_G[11].IN0
+num1[11] => LOP_Z.IN0
+num1[12] => LOP_T[12].IN0
+num1[12] => LOP_G[12].IN0
+num1[12] => LOP_Z.IN0
+num1[13] => LOP_T[13].IN0
+num1[13] => LOP_G[13].IN0
+num1[13] => LOP_Z.IN0
+num1[14] => LOP_T[14].IN0
+num1[14] => LOP_G[14].IN0
+num1[14] => LOP_Z.IN0
+num1[15] => LOP_T[15].IN0
+num1[15] => LOP_G[15].IN0
+num1[15] => LOP_Z.IN0
+num1[16] => LOP_T[16].IN0
+num1[16] => LOP_G[16].IN0
+num1[16] => LOP_Z.IN0
+num1[17] => LOP_T[17].IN0
+num1[17] => LOP_G[17].IN0
+num1[17] => LOP_Z.IN0
+num1[18] => LOP_T[18].IN0
+num1[18] => LOP_G[18].IN0
+num1[18] => LOP_Z.IN0
+num1[19] => LOP_T[19].IN0
+num1[19] => LOP_G[19].IN0
+num1[19] => LOP_Z.IN0
+num1[20] => LOP_T[20].IN0
+num1[20] => LOP_G[20].IN0
+num1[20] => LOP_Z.IN0
+num1[21] => LOP_T[21].IN0
+num1[21] => LOP_G[21].IN0
+num1[21] => LOP_Z.IN0
+num1[22] => LOP_T[22].IN0
+num1[22] => LOP_G[22].IN0
+num1[22] => LOP_Z.IN0
+num1[23] => LOP_T[23].IN0
+num1[23] => LOP_G[23].IN0
+num1[23] => LOP_Z.IN0
+num1[24] => LOP_T[24].IN0
+num1[24] => LOP_G[24].IN0
+num1[24] => LOP_Z.IN0
+num1[25] => LOP_T[25].IN0
+num1[25] => LOP_G[25].IN0
+num1[25] => LOP_Z.IN0
+num1[26] => LOP_T[26].IN0
+num1[26] => LOP_G[26].IN0
+num1[26] => LOP_Z.IN0
+num1[27] => LOP_T[27].IN0
+num1[27] => LOP_G[27].IN0
+num1[27] => LOP_Z.IN0
+num1[28] => LOP_T[28].IN0
+num1[28] => LOP_G[28].IN0
+num1[28] => LOP_Z.IN0
+num1[29] => LOP_T[29].IN0
+num1[29] => LOP_G[29].IN0
+num1[29] => LOP_Z.IN0
+num1[30] => LOP_T[30].IN0
+num2[0] => LOP_T[0].IN1
+num2[0] => LOP_G[0].IN1
+num2[0] => LOP_Z.IN1
+num2[1] => LOP_G[1].IN1
+num2[1] => LOP_Z.IN1
+num2[2] => LOP_T[2].IN1
+num2[2] => LOP_G[2].IN1
+num2[2] => LOP_Z.IN1
+num2[3] => LOP_T[3].IN1
+num2[3] => LOP_G[3].IN1
+num2[3] => LOP_Z.IN1
+num2[4] => LOP_T[4].IN1
+num2[4] => LOP_G[4].IN1
+num2[4] => LOP_Z.IN1
+num2[5] => LOP_T[5].IN1
+num2[5] => LOP_G[5].IN1
+num2[5] => LOP_Z.IN1
+num2[6] => LOP_T[6].IN1
+num2[6] => LOP_G[6].IN1
+num2[6] => LOP_Z.IN1
+num2[7] => LOP_T[7].IN1
+num2[7] => LOP_G[7].IN1
+num2[7] => LOP_Z.IN1
+num2[8] => LOP_T[8].IN1
+num2[8] => LOP_G[8].IN1
+num2[8] => LOP_Z.IN1
+num2[9] => LOP_T[9].IN1
+num2[9] => LOP_G[9].IN1
+num2[9] => LOP_Z.IN1
+num2[10] => LOP_T[10].IN1
+num2[10] => LOP_G[10].IN1
+num2[10] => LOP_Z.IN1
+num2[11] => LOP_T[11].IN1
+num2[11] => LOP_G[11].IN1
+num2[11] => LOP_Z.IN1
+num2[12] => LOP_T[12].IN1
+num2[12] => LOP_G[12].IN1
+num2[12] => LOP_Z.IN1
+num2[13] => LOP_T[13].IN1
+num2[13] => LOP_G[13].IN1
+num2[13] => LOP_Z.IN1
+num2[14] => LOP_T[14].IN1
+num2[14] => LOP_G[14].IN1
+num2[14] => LOP_Z.IN1
+num2[15] => LOP_T[15].IN1
+num2[15] => LOP_G[15].IN1
+num2[15] => LOP_Z.IN1
+num2[16] => LOP_T[16].IN1
+num2[16] => LOP_G[16].IN1
+num2[16] => LOP_Z.IN1
+num2[17] => LOP_T[17].IN1
+num2[17] => LOP_G[17].IN1
+num2[17] => LOP_Z.IN1
+num2[18] => LOP_T[18].IN1
+num2[18] => LOP_G[18].IN1
+num2[18] => LOP_Z.IN1
+num2[19] => LOP_T[19].IN1
+num2[19] => LOP_G[19].IN1
+num2[19] => LOP_Z.IN1
+num2[20] => LOP_T[20].IN1
+num2[20] => LOP_G[20].IN1
+num2[20] => LOP_Z.IN1
+num2[21] => LOP_T[21].IN1
+num2[21] => LOP_G[21].IN1
+num2[21] => LOP_Z.IN1
+num2[22] => LOP_T[22].IN1
+num2[22] => LOP_G[22].IN1
+num2[22] => LOP_Z.IN1
+num2[23] => LOP_T[23].IN1
+num2[23] => LOP_G[23].IN1
+num2[23] => LOP_Z.IN1
+num2[24] => LOP_T[24].IN1
+num2[24] => LOP_G[24].IN1
+num2[24] => LOP_Z.IN1
+num2[25] => LOP_T[25].IN1
+num2[25] => LOP_G[25].IN1
+num2[25] => LOP_Z.IN1
+num2[26] => LOP_T[26].IN1
+num2[26] => LOP_G[26].IN1
+num2[26] => LOP_Z.IN1
+num2[27] => LOP_T[27].IN1
+num2[27] => LOP_G[27].IN1
+num2[27] => LOP_Z.IN1
+num2[28] => LOP_T[28].IN1
+num2[28] => LOP_G[28].IN1
+num2[28] => LOP_Z.IN1
+num2[29] => LOP_T[29].IN1
+num2[29] => LOP_G[29].IN1
+num2[29] => LOP_Z.IN1
+num2[30] => LOP_T[30].IN1
 n[0] <= Mux1.DB_MAX_OUTPUT_PORT_TYPE
 n[1] <= Mux0.DB_MAX_OUTPUT_PORT_TYPE
 n[2] <= BNE:BNE1.y
@@ -1378,7 +1536,7 @@ n[3] <= BNE:BNE1.y
 n[4] <= BNE:BNE1.y
 
 
-|unum_adder|LZC_fraction:lzc_fraction|BNE:BNE1
+|unum_adder|LZA_fraction:lza_fraction1|BNE:BNE1
 a[0] => y.IN0
 a[0] => y.IN1
 a[0] => y.IN0
@@ -1402,7 +1560,7 @@ y[1] <= y.DB_MAX_OUTPUT_PORT_TYPE
 y[2] <= y.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|unum_adder|LZC_fraction:lzc_fraction|NLC:NLC7
+|unum_adder|LZA_fraction:lza_fraction1|NLC:NLC7
 x[0] => a.IN0
 x[1] => z.IN0
 x[1] => a.IN1
@@ -1417,7 +1575,7 @@ z[0] <= z.DB_MAX_OUTPUT_PORT_TYPE
 z[1] <= z.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|unum_adder|LZC_fraction:lzc_fraction|NLC:NLC6
+|unum_adder|LZA_fraction:lza_fraction1|NLC:NLC6
 x[0] => a.IN0
 x[1] => z.IN0
 x[1] => a.IN1
@@ -1432,7 +1590,7 @@ z[0] <= z.DB_MAX_OUTPUT_PORT_TYPE
 z[1] <= z.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|unum_adder|LZC_fraction:lzc_fraction|NLC:NLC5
+|unum_adder|LZA_fraction:lza_fraction1|NLC:NLC5
 x[0] => a.IN0
 x[1] => z.IN0
 x[1] => a.IN1
@@ -1447,7 +1605,7 @@ z[0] <= z.DB_MAX_OUTPUT_PORT_TYPE
 z[1] <= z.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|unum_adder|LZC_fraction:lzc_fraction|NLC:NLC4
+|unum_adder|LZA_fraction:lza_fraction1|NLC:NLC4
 x[0] => a.IN0
 x[1] => z.IN0
 x[1] => a.IN1
@@ -1462,7 +1620,7 @@ z[0] <= z.DB_MAX_OUTPUT_PORT_TYPE
 z[1] <= z.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|unum_adder|LZC_fraction:lzc_fraction|NLC:NLC3
+|unum_adder|LZA_fraction:lza_fraction1|NLC:NLC3
 x[0] => a.IN0
 x[1] => z.IN0
 x[1] => a.IN1
@@ -1477,7 +1635,7 @@ z[0] <= z.DB_MAX_OUTPUT_PORT_TYPE
 z[1] <= z.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|unum_adder|LZC_fraction:lzc_fraction|NLC:NLC2
+|unum_adder|LZA_fraction:lza_fraction1|NLC:NLC2
 x[0] => a.IN0
 x[1] => z.IN0
 x[1] => a.IN1
@@ -1492,7 +1650,7 @@ z[0] <= z.DB_MAX_OUTPUT_PORT_TYPE
 z[1] <= z.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|unum_adder|LZC_fraction:lzc_fraction|NLC:NLC1
+|unum_adder|LZA_fraction:lza_fraction1|NLC:NLC1
 x[0] => a.IN0
 x[1] => z.IN0
 x[1] => a.IN1
@@ -1507,7 +1665,7 @@ z[0] <= z.DB_MAX_OUTPUT_PORT_TYPE
 z[1] <= z.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|unum_adder|LZC_fraction:lzc_fraction|NLC:NLC0
+|unum_adder|LZA_fraction:lza_fraction1|NLC:NLC0
 x[0] => a.IN0
 x[1] => z.IN0
 x[1] => a.IN1

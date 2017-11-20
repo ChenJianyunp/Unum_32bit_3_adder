@@ -7,41 +7,64 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-Z0 dF:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim
+Z0 dF:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/simulation/modelsim
 vBNE
-Z1 !s110 1510532188
+Z1 !s110 1511130043
 !i10b 1
-!s100 KS?mk695dLFz15_FW0d5i0
-IW0iIbMTZlSUR;9RUgGV841
+!s100 4BCe<YLD]U8geQRBB`Wgk0
+I2ZiD19z=JBfhVOJckMfha2
 Z2 VDg1SIo80bB@j0V0VzS_@n1
 R0
-Z3 w1510532177
-Z4 8F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v
-Z5 FF:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v
-L0 266
+Z3 w1511130028
+Z4 8F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/unum_adder.v
+Z5 FF:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/unum_adder.v
+L0 328
 Z6 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z7 !s108 1510532188.000000
-Z8 !s107 F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v|
-Z9 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder|F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/unum_adder.v|
+Z7 !s108 1511130043.000000
+Z8 !s107 F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/unum_adder.v|
+Z9 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder|F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/unum_adder.v|
 !i113 1
 Z10 o-vlog01compat -work work
-Z11 !s92 -vlog01compat -work work +incdir+F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder
+Z11 !s92 -vlog01compat -work work +incdir+F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder
 Z12 tCvgOpt 0
 n@b@n@e
-vLZC
+vLZA_fraction
 R1
 !i10b 1
-!s100 ?GfFG7god;jP^;IAP3Ii]2
-I[_QSIk<Y;e3mDVHk1BJcN3
+!s100 No@VE8DFM]]VA<SY6@J6=2
+I`:CC^3Um_IQi<SA`2FCV11
 R2
 R0
 R3
 R4
 R5
-L0 189
+L0 238
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+R12
+n@l@z@a_fraction
+vLZC
+R1
+!i10b 1
+!s100 6_n]`7@WZ:jgS?YB?fGGX1
+IbQGXEFhbG3N]CA?o=gih81
+R2
+R0
+R3
+R4
+R5
+L0 198
 R6
 r1
 !s85 0
@@ -57,14 +80,14 @@ n@l@z@c
 vLZC_fraction
 R1
 !i10b 1
-!s100 Be@DCU7<;WzAJ]VN[UcjF1
-I3l2L[cN9gnb58b3hHcHiz1
+!s100 dG3k]ne8eX7`@:jz<=4AW3
+I7hFJL]ZZ1g6@zN8]YGB372
 R2
 R0
 R3
 R4
 R5
-L0 229
+L0 291
 R6
 r1
 !s85 0
@@ -80,14 +103,14 @@ n@l@z@c_fraction
 vNLC
 R1
 !i10b 1
-!s100 =oj[D7JP^d3b9jP=45F:<2
-I9DeK[XLh_J;nnGG>JIgYQ1
+!s100 nN=m1T^O6C6Gz^RNFfB`P1
+I5e`]NJZ=k]1^mQGIoEgdI0
 R2
 R0
 R3
 R4
 R5
-L0 277
+L0 339
 R6
 r1
 !s85 0
@@ -103,8 +126,8 @@ n@n@l@c
 vunum_adder
 R1
 !i10b 1
-!s100 iTSYX^aV:m3Q_bPS2YDkd0
-IUW1[Q6[NCYSj@BgbK;[9F2
+!s100 R=j<MQ46;RQRIF4WJKMI`2
+I=e5V4MH:^S2CBi`7^f3=m0
 R2
 R0
 R3
@@ -123,24 +146,24 @@ R10
 R11
 R12
 vunum_adder_vlg_tst
-R1
+!s110 1511130044
 !i10b 1
 !s100 <45172MMDILD2fG6n@2zc0
-I_NPO0=cQ5hJh87:hF;`LN2
+IefZDKDYbFRJY9<nZ3@48C1
 R2
 R0
 w1510531388
-8F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt
-FF:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt
+8F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt
+FF:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt
 L0 29
 R6
 r1
 !s85 0
 31
-R7
-!s107 F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt|
-!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim|F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt|
+!s108 1511130044.000000
+!s107 F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/simulation/modelsim|F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/simulation/modelsim/unum_adder.vt|
 !i113 1
 R10
-!s92 -vlog01compat -work work +incdir+F:/Unum/unumIII_32_3_adder_pipline2/Unum_32bit_3_adder/simulation/modelsim
+!s92 -vlog01compat -work work +incdir+F:/Unum/unumIII_32_3_adder_pipline4/Unum_32bit_3_adder/simulation/modelsim
 R12
